@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kavuşmamıza Ne Kadar Kaldı? 🌸</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-1: #fff5f7;
+        --bg-2: #ffeef3;
+        --bg-3: #fffafc;
+        --card-bg: rgba(255, 255, 255, 0.84);
+        --accent-color: #ff8fa3;
+        --accent-strong: #ff6b8a;
+        --text-color: #5f4c52;
+        --soft-shadow: 0 12px 30px rgba(255, 143, 163, 0.24);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(
+          135deg,
+          var(--bg-1),
+          var(--bg-2),
+          var(--bg-3)
+        );
+        font-family: "Poppins", sans-serif;
+        color: var(--text-color);
+        overflow: hidden;
+        position: relative;
+      }
+
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        filter: blur(10px);
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      body::before {
+        top: -70px;
+        left: -70px;
+        background: rgba(255, 182, 193, 0.35);
+      }
+
+      body::after {
+        bottom: -90px;
+        right: -60px;
+        background: rgba(255, 221, 230, 0.5);
+      }
+
+      .container {
+        text-align: center;
+        background: var(--card-bg);
+        padding: 30px 24px;
+        border-radius: 28px;
+        box-shadow: var(--soft-shadow);
+        width: min(460px, 100%);
+        backdrop-filter: blur(7px);
+        z-index: 10;
+        animation: glow 3.8s ease-in-out infinite;
+        border: 1px solid rgba(255, 255, 255, 0.75);
+      }
+
+      .avatar {
+        width: 72px;
+        height: 72px;
+        margin: 0 auto 12px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 30px;
+        background: linear-gradient(145deg, #ffd6e0, #fff0f5);
+        box-shadow: 0 8px 20px rgba(255, 143, 163, 0.32);
+      }
+
+      h1 {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(2rem, 7vw, 2.8rem);
+        color: var(--accent-strong);
+        margin: 0 0 10px;
+      }
+
+      p {
+        margin: 0 0 16px;
+      }
+
+      input[type="datetime-local"] {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid rgba(255, 143, 163, 0.75);
+        border-radius: 14px;
+        margin-bottom: 18px;
+        font-family: inherit;
+        outline: none;
+        color: var(--text-color);
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      input[type="datetime-local"]:focus {
+        border-color: var(--accent-strong);
+        box-shadow: 0 0 0 4px rgba(255, 107, 138, 0.14);
+      }
+
+      #timer {
+        margin: 12px 0 2px;
+        min-height: 152px;
+      }
+
+      .timer-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .time-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 14px;
+        padding: 10px 8px;
+        box-shadow: 0 6px 14px rgba(255, 143, 163, 0.2);
+      }
+
+      .time-value {
+        font-size: 1.55rem;
+        font-weight: 700;
+        color: var(--accent-strong);
+        line-height: 1.2;
+      }
+
+      .time-label {
+        font-size: 0.8rem;
+        opacity: 0.85;
+      }
+
+      .timer-line {
+        margin-top: 12px;
+        font-size: 0.95rem;
+      }
+
+      #loveNote {
+        margin: 12px 0 18px;
+        font-size: 0.9rem;
+        color: #7a6168;
+        min-height: 22px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      button {
+        background: linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--accent-strong)
+        );
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s,
+          filter 0.2s;
+        box-shadow: 0 6px 16px rgba(255, 107, 138, 0.34);
+        font-family: inherit;
+      }
+
+      button:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 10px 20px rgba(255, 107, 138, 0.35);
+        filter: saturate(1.05);
+      }
+
+      button:active {
+        transform: scale(0.96);
+      }
+
+      .floaty {
+        position: fixed;
+        font-size: 20px;
+        opacity: 0.55;
+        animation: fly linear forwards;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      @keyframes fly {
+        0% {
+          transform: translateY(108vh) rotate(0deg);
+          opacity: 0;
+        }
+        12% {
+          opacity: 0.7;
+        }
+        100% {
+          transform: translateY(-15vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 12px 30px rgba(255, 143, 163, 0.22);
+        }
+        50% {
+          box-shadow: 0 16px 38px rgba(255, 143, 163, 0.34);
+        }
+      }
+
+      @media (max-width: 420px) {
+        body {
+          padding: 14px;
+        }
+
+        .container {
+          border-radius: 22px;
+          padding: 24px 16px;
+        }
+
+        .time-value {
+          font-size: 1.35rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="avatar">💖</div>
+      <h1>Kavuşmamıza...</h1>
+      <p>Buluşacağımız tarihi ve saati seç sevgilim: 🌸</p>
+      <input type="datetime-local" id="targetDate" onchange="startTimer()" />
+
+      <div id="timer">Tarih seçildiğinde geri sayım başlayacak... ✨</div>
+      <div id="loveNote"></div>
+
+      <div class="actions">
+        <button id="toggleBtn" onclick="toggleMode()">
+          Saat Moduna Geç ⏳
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let countdown;
+      let showOnlyHours = false;
+      let noteIndex = 0;
+      const emojis = ["❤️", "🌸", "✨", "🫧", "💗", "🎀"];
+      const loveNotes = [
+        "Her saniye bizi birbirimize daha da yaklaştırıyor.",
+        "Bugünün en tatlı haberi: kavuşmaya biraz daha az kaldı.",
+        "Kalbim, bu sayacın sonundaki anı bekliyor.",
+        "Birlikte geçecek anlar için küçük bir geri sayım.",
+        "Bu bekleyişin sonunda kocaman bir sarılma var.",
+      ];
+
+      window.onload = function () {
+        const savedDate = localStorage.getItem("kavusmaTarihi");
+        if (savedDate) {
+          document.getElementById("targetDate").value = savedDate;
+          startTimer();
+        }
+        rotateLoveNote();
+        setInterval(rotateLoveNote, 5500);
+      };
+
+      function rotateLoveNote() {
+        const note = document.getElementById("loveNote");
+        note.textContent = loveNotes[noteIndex % loveNotes.length];
+        noteIndex += 1;
+      }
+
+      function renderTimerCards(values, modeText) {
+        const timerDiv = document.getElementById("timer");
+        timerDiv.innerHTML = `
+          <div class="timer-grid">
+            <div class="time-card"><div class="time-value">${values.days}</div><div class="time-label">Gün</div></div>
+            <div class="time-card"><div class="time-value">${values.hours}</div><div class="time-label">Saat</div></div>
+            <div class="time-card"><div class="time-value">${values.minutes}</div><div class="time-label">Dakika</div></div>
+            <div class="time-card"><div class="time-value">${values.seconds}</div><div class="time-label">Saniye</div></div>
+          </div>
+          <div class="timer-line">${modeText}</div>
+        `;
+      }
+
+      function startTimer() {
+        const targetInput = document.getElementById("targetDate").value;
+        if (!targetInput) return;
+
+        localStorage.setItem("kavusmaTarihi", targetInput);
+        const targetDate = new Date(targetInput).getTime();
+
+        if (countdown) clearInterval(countdown);
+
+        countdown = setInterval(() => {
+          const now = new Date().getTime();
+          const distance = targetDate - now;
+
+          if (distance < 0) {
+            clearInterval(countdown);
+            document.getElementById("timer").innerHTML =
+              '<div class="time-value">KAVUŞTUK! ❤️</div><div class="timer-line">Artık geri sayım değil, mutluluk zamanı.</div>';
+            return;
+          }
+
+          const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+          );
+          const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) / (1000 * 60),
+          );
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          if (showOnlyHours) {
+            const totalHours = Math.floor(distance / (1000 * 60 * 60));
+            renderTimerCards(
+              {
+                days: 0,
+                hours: totalHours,
+                minutes,
+                seconds,
+              },
+              `Toplam <b>${totalHours}</b> saat kaldı.`,
+            );
+          } else {
+            renderTimerCards(
+              {
+                days,
+                hours,
+                minutes,
+                seconds,
+              },
+              "Kavuşma anı yaklaşıyor. ✨",
+            );
+          }
+        }, 1000);
+      }
+
+      function toggleMode() {
+        showOnlyHours = !showOnlyHours;
+        const toggleBtn = document.getElementById("toggleBtn");
+        toggleBtn.textContent = showOnlyHours
+          ? "Normal Moda Geç 💞"
+          : "Saat Moduna Geç ⏳";
+
+        const targetInput = document.getElementById("targetDate").value;
+        if (targetInput) startTimer();
+      }
+
+      function createFloaty() {
+        const floaty = document.createElement("div");
+        floaty.className = "floaty";
+        floaty.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        floaty.style.left = Math.random() * 100 + "vw";
+        floaty.style.animationDuration = 3 + Math.random() * 3 + "s";
+        floaty.style.fontSize = 16 + Math.random() * 16 + "px";
+        document.body.appendChild(floaty);
+        setTimeout(() => floaty.remove(), 6200);
+      }
+
+      setInterval(createFloaty, 430);
+    </script>
+  </body>
+</html>
